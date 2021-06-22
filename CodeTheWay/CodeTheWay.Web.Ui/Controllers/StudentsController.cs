@@ -82,7 +82,14 @@ namespace CodeTheWay.Web.Ui.Controllers
         public async Task<IActionResult> Details(Guid id)
         {
             var student = await StudentService.GetStudent(id);
-            return View(student);
+            StudentRegistrationViewModel a = new StudentRegistrationViewModel()
+            {
+                Id = student.Id,
+                LastName = student.LastName,
+                FirstMidName = student.FirstMidName,
+                Age = 0
+            };
+            return View(a);
         }
         public async Task<IActionResult> Delete(Guid id)
         {
