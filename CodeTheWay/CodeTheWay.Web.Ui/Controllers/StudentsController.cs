@@ -1,4 +1,5 @@
-﻿using CodeTheWay.Web.Ui.Models;
+﻿using CodeTheWay.Web.Ui.Models.ViewModels;
+using CodeTheWay.Web.Ui.Models;
 using CodeTheWay.Web.Ui.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -24,39 +25,87 @@ namespace CodeTheWay.Web.Ui.Controllers
 
         public async Task<IActionResult> Create()
         {
-            return View(new Student());
+            return View(new StudentRegistrationViewModel());
         }
         [HttpPost]
-        public async Task<IActionResult> Register(Student model)
+        public async Task<IActionResult> Register(StudentRegistrationViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var student = await StudentService.Create(model);
-                return RedirectToAction("Index");
+                if (model.Age < 19 && model.Age >= 0)
+                {
+
+                    Student student = new Student()
+                    {
+                        Id = model.Id,
+                        LastName = model.LastName,
+                        FirstMidName = model.FirstName
+                    };
+                    var result = await StudentService.Create(student);
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
+
             return View(model);
         }
 
         public async Task<IActionResult> Edit(Guid id)
         {
             var student = await StudentService.GetStudent(id);
-            return View(student);
+            StudentRegistrationViewModel test = new StudentRegistrationViewModel()
+            {
+                Id = student.Id,
+                LastName = student.LastName,
+                FirstName = student.FirstMidName,
+                Age = 0
+
+            };
+            return View(test);
         }
         [HttpPost]
-        public async Task<IActionResult> UpDate(Student model)
+        public async Task<IActionResult> UpDate(StudentRegistrationViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var student = await StudentService.Update(model);
-                return RedirectToAction("Index");
+                if (model.Age < 19 && model.Age >= 0)
+                {
+
+                    Student student = new Student()
+                    {
+                        Id = model.Id,
+                        LastName = model.LastName,
+                        FirstMidName = model.FirstName,
+                    };
+                    var result = await StudentService.Update(student);
+                    return RedirectToAction("Index");
+
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
+
             return View(model);
         }
-
+    
         public async Task<IActionResult> Details(Guid id)
         {
             var student = await StudentService.GetStudent(id);
-            return View(student);
+            StudentRegistrationViewModel test = new StudentRegistrationViewModel()
+            {
+                Id = student.Id,
+                LastName = student.LastName,
+                FirstName = student.FirstMidName,
+                Age = 0
+
+            };
+            return View(test);
         }
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -64,6 +113,5 @@ namespace CodeTheWay.Web.Ui.Controllers
             await StudentService.Delete(student);
             return RedirectToAction("Index");
         }
-
     }
 }
