@@ -65,5 +65,6 @@ namespace CodeTheWay.Web.Ui
                 endpoints.MapRazorPages();
             });
         }
+
     }
 }
