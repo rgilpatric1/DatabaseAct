@@ -5,12 +5,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using CodeTheWay.Web.Ui.Models.ViewModels;
 namespace CodeTheWay.Web.Ui.Controllers
 {
     public class StudentsController : Controller
     {
         private IStudentsService StudentService;
+        private string FirstName;
+        private string lastName;
+        private int age;
 
         public StudentsController(IStudentsService studentsService)
         {
@@ -24,19 +27,37 @@ namespace CodeTheWay.Web.Ui.Controllers
 
         public async Task<IActionResult> Create()
         {
-            return View(new Student());
+            return View(new StudentRegistrationViewModel());
         }
         [HttpPost]
-        public async Task<IActionResult> Register(Student model)
+        public async Task<IActionResult> Register(StudentRegistrationViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var student = await StudentService.Create(model);
-                return RedirectToAction("Index");
-            }
-            return View(model);
-        }
+                if (model.age <= 18)
+                {
+                    {
+                        Student listofStudents = new Student()
+                        {
 
+                            Id = model.Id,
+                            LastName = model.lastName,
+                            FirstMidName = model.firstName
+
+                        };
+
+                        return RedirectToAction("Index");
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+                
+                    return View("model");
+                
+        }
         public async Task<IActionResult> Edit(Guid id)
         {
             var student = await StudentService.GetStudent(id);
