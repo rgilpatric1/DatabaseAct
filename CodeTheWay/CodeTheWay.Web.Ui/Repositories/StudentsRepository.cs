@@ -18,15 +18,33 @@ namespace CodeTheWay.Web.Ui.Repositories
 
         public async Task<Student> Create(Student student)
         {
-            var result = await this.AppDbContext.AddAsync(student);
+            var result = await this.AppDbContext.Students.AddAsync(student);
             await this.AppDbContext.SaveChangesAsync();
-
             return result.Entity;
+
         }
 
         public async Task<List<Student>> GetStudents()
         {
-            return await this.AppDbContext.Students.ToListAsync();
+            return await AppDbContext.Students.ToListAsync();
         }
+
+        public async Task<Student> GetStudent(Guid id)
+        {
+            return await AppDbContext.Students.FirstOrDefaultAsync(i => i.Id == id);
+        }
+        public async Task<Student> Update(Student model)
+        {
+            var result = AppDbContext.Students.Update(model);
+            await AppDbContext.SaveChangesAsync();
+            return result.Entity;
+        }
+        public async Task<Student> Delete(Student model)
+        {
+            AppDbContext.Students.Remove(model);
+            await AppDbContext.SaveChangesAsync();
+            return model;
+        }
+
     }
 }
