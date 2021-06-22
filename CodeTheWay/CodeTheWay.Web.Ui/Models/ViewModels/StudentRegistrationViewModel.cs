@@ -7,7 +7,7 @@ namespace CodeTheWay.Web.Ui.Models.ViewModels
 {
     public class StudentRegistrationViewModel
     {
-        public int age { get; set; }
+      
        
        public Guid Id { get; set; }
 
@@ -15,9 +15,10 @@ namespace CodeTheWay.Web.Ui.Models.ViewModels
 
         public string lastName { get; set; }
 
+        public int age { get; set; }
 
 
-       
-       
+
+
     }
 }

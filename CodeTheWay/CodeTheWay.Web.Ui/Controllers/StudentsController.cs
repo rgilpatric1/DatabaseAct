@@ -34,7 +34,8 @@ namespace CodeTheWay.Web.Ui.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.age <= 18)
+               
+                if (model.age > 0 && model.age <= 18)
                 {
                     {
                         Student listofStudents = new Student()
@@ -61,15 +62,34 @@ namespace CodeTheWay.Web.Ui.Controllers
         public async Task<IActionResult> Edit(Guid id)
         {
             var student = await StudentService.GetStudent(id);
-            return View(student);
+            StudentRegistrationViewModel students = new StudentRegistrationViewModel()
+            {
+                Id = student.Id,
+                lastName = student.LastName,
+                firstName = student.FirstMidName,
+                age = 0,
+            };
+            return View(students);
         }
         [HttpPost]
         public async Task<IActionResult> UpDate(Student model)
         {
             if (ModelState.IsValid)
             {
-                var student = await StudentService.Update(model);
+                if (model.Age > 0 && model.Age <= 18)
+                {
+                    Student list = new Student()
+                    {
+                        Id = model.Id,
+                        LastName = model.LastName,
+                        FirstMidName = model.FirstMidName
+                    };
+                    var student = await StudentService.Update(list);
+                }
+
+
                 return RedirectToAction("Index");
+                
             }
             return View(model);
         }
@@ -77,7 +97,8 @@ namespace CodeTheWay.Web.Ui.Controllers
         public async Task<IActionResult> Details(Guid id)
         {
             var student = await StudentService.GetStudent(id);
-            return View(student);
+            StudentRegistrationViewModel listOfStudents = new StudentRegistrationViewModel();
+            return View(listOfStudents.Id);
         }
         public async Task<IActionResult> Delete(Guid id)
         {
