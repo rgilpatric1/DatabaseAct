@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CodeTheWay.Web.Ui.Services
+namespace CodeTheWay.Web.Ui.Models.ViewModels
 {
-   public interface IShippingContainerService
+    public class ShippingContainerRegisterViewModel
     {
     }
 }
