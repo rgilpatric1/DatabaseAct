@@ -73,3 +73,7 @@ body {
 #hidden {
     visibility: hidden
 }
+
+body {
+    background-color: blue;
+}
