@@ -9,7 +9,7 @@ a.navbar-brand {
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+  color:purple;
 }
 
 .btn-primary {
@@ -76,5 +76,6 @@ body {
 
 body {
     font-family:'Comic Sans MS';
+    color:white;
     background-color:black;
 }
