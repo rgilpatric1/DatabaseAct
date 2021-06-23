@@ -13,6 +13,15 @@ namespace CodeTheWay.Web.Ui.Repositories
         {
             this.AppDbContext = dbContext;
         }
+
+        public async Task<ShippingContainer> Create(ShippingContainer container)
+        {
+            var result = await this.AppDbContext.ShippingContainer.AddAsync(container);
+            await this.AppDbContext.SaveChangesAsync();
+            return result.Entity;
+
+        }
+
     }
 }
 

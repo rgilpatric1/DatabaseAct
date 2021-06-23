@@ -12,7 +12,7 @@ namespace CodeTheWay.Web.Ui.Controllers
 {
     public class ShippingContainerController : Controller
     {
-        private IShippingContainerService ShippingContainerService;
+       IShippingContainerService ShippingContainerService;
 
         public ShippingContainerController(IShippingContainerService shippingContainerService)
         {
@@ -54,17 +54,41 @@ namespace CodeTheWay.Web.Ui.Controllers
 
         public async Task<IActionResult> Edit(Guid Id)
         {
-            var shippingContainer = await ShippingContainerService.getShippingContainer(Id);
-
+            var container = await ShippingContainerService
             ShippingContainerRegistrationViewModel container = new ShippingContainerRegistrationViewModel()
             {
-                Id = container.Id,
+                
                 Weight = container.Weight,
-                Destination = container.Destination
+                Id = container.Id,
+             Destination = container.Destination
 
             };
+
+            return View(container);
+
         }
 
+        public async Task<IActionResult> Update(ShippingContainer model)
+        {
+            if(ModelState.IsValid)
+            {
+                if(model.Weight > 0 && model.Destination.Length > 0)
+                {
+                    ShippingContainer listOfContainers = new ShippingContainer()
+                    {
+                        Id = model.Id,
+                        Weight = model.Weight,
+                        Destination = model.Destination
+
+                    };
+                    var container = await ShippingContainerService.Update(listOfContainers);
+                }
+
+                return RedirectToAction("Index");
+
+            }
+            return View(model);
+        }
 
 
 
