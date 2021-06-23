@@ -11,7 +11,7 @@ namespace CodeTheWay.Web.Ui.Services
     {
         private IStudentsRepository StudentRepo;
 
-        public StudentsService(AppDbContext dbContext) 
+        public StudentsService(AppDbContext dbContext)
         {
             this.StudentRepo = new StudentsRepository(dbContext);
         }

@@ -14,5 +14,27 @@ namespace CodeTheWay.Web.Ui.Services
         {
             this.ShippingContainerRepository = new ShippingContainerRepository(dbContext);
         }
+        public async Task<ShippingContainer> Create(ShippingContainer shippingContainer)
+        {
+            return await this.ShippingContainerRepository.Create(shippingContainer);
+        }
+
+        public async Task<List<ShippingContainer>> GetShippingContainers()
+        {
+            return await this.ShippingContainerRepository.GetShippingContainers();
+        }
+
+        public async Task<ShippingContainer> GetShippingContainer(Guid id)
+        {
+            return await this.ShippingContainerRepository.GetShippingContainer(id);
+        }
+        public async Task<ShippingContainer> Update(ShippingContainer shippingContainer)
+        {
+            return await ShippingContainerRepository.Update(shippingContainer);
+        }
+        public async Task<ShippingContainer> Delete(ShippingContainer shippingContainer)
+        {
+            return await ShippingContainerRepository.Delete(shippingContainer);
+        }
     }
 }
