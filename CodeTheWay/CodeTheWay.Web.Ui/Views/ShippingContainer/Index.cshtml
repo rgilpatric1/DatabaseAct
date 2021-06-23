@@ -2,45 +2,47 @@
 @*
     ViewData["Title"] = "Index";
 *@
-<h1>Index</h1>
-<div>
-    <table>
-        <tr>
-            <th>
-                Weight
-            </th>
-            <th>
-                Destination
-            </th>
-        </tr>
+<div class="container-fluid">
+    <h1 class="tableLinks">Index</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" class="tableLinks">Weight(in tons)</th>
+                <th scope="col" class="tableLinks">Destination</th>
+                <th scope="col" class="tableLinks">Commands</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td id="testID">
+                        @Html.DisplayFor(modelItem => item.Weight)
+                    </td>
+                    <td id="testID">
+                        @Html.DisplayFor(modelItem => item.Destination)
+                    </td>
+                    <td>
+                        <div class="tableLinks">
+                            <div>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new {@id = "testID" })
+                            </div>
+
+                            <div>
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @id = "testID" })
+                            </div>
+                            <div>
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @id = "testID" })
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
+
+    <div >
+        <a asp-action="Create" class="tableLinks">Create a shipping container.</a>
+    </div>
 </div>
-<table>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Weight)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Destination)
-            </td>
-            <td>
-                <div>
-                    <div>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                    </div>
-                </div>
-                <div>
-                    @Html.ActionLink("Details", "Details", new { id = item.Id })
-                </div>
-                <div>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </div>
-            </td>
-        </tr>
-    }
-</table>
-<div>
-    <a asp-action="Create">Create a shipping container.</a>
-</div>
+

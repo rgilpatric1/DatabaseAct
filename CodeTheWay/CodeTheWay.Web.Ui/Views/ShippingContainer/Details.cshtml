@@ -2,9 +2,12 @@
 @*
     ViewData["Title"] = "Details";
 *@
-<h1>Details</h1>
-<p>Weight:  @Model.Weight</p>
-<p>Destination:  @Model.Destination</p>
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="container-fluid">
+    <h1 class="tableLinks">Details</h1>
+    <p class="tableLinks">Weight:  @Model.Weight</p>
+    <p class="tableLinks">Destination:  @Model.Destination</p>
+    <div>
+        <a asp-action="Index" class="tableLinks">Back to List</a>
+    </div>
 </div>
+
