@@ -31,13 +31,14 @@ namespace CodeTheWay.Web.Ui
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IStudentsService, StudentsService>();
+            services.AddScoped<IShippingContainerService, ShippingContainerService>();
 
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlite(
+            services.AddDbContext<AppDbContext>(options => options.UseSqlite(
                     Configuration.GetConnectionString("SqliteConnection")));
 
             services.AddRazorPages();
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
