@@ -1,4 +1,5 @@
-﻿using CodeTheWay.Web.Ui.Models.ViewModels;
+﻿using CodeTheWay.Web.Ui.Models;
+using CodeTheWay.Web.Ui.Models.ViewModels;
 using CodeTheWay.Web.Ui.Services; //CHECK
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -27,6 +28,14 @@ namespace CodeTheWay.Web.Ui.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(ShippingContainerRegistrationViewModel model)
         {
+            ShippingContainer shippingContainer = new ShippingContainer()
+                    {
+                        Id = model.Id,
+                        Weight = model.Weight,
+                        Destination = model.Destination
+                    };
+            var result = await ShippingContainerService.Create(shippingContainer);
+
             return RedirectToAction("Index");
         }
 
@@ -45,6 +54,14 @@ namespace CodeTheWay.Web.Ui.Controllers
         [HttpPost]
         public async Task<IActionResult> UpDate(ShippingContainerRegistrationViewModel model)
         {
+            ShippingContainer shippingContainer = new ShippingContainer()
+            {
+                Id = model.Id,
+                Weight = model.Weight,
+                Destination = model.Destination
+            };
+            var result = await ShippingContainerService.Update(shippingContainer);
+
             return RedirectToAction("Index");
         }
         public async Task<IActionResult> Details(Guid id)
