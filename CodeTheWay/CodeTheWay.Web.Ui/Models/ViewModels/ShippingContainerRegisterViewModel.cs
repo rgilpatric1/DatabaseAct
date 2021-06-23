@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CodeTheWay.Web.Ui.Models
+namespace CodeTheWay.Web.Ui.Models.ViewModels
 {
-    public class ShippingContainer
+    public class ShippingContainerRegistrationViewModel
     {
         public Guid Id { get; set; }
         public int Weight { get; set; }
